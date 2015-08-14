@@ -1,0 +1,18 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+  3) urxvt -e yaourt -Syua ;;
+esac
+
+UPDATES=$(yaourt -Qua | wc -l)
+
+
+if [[ $UPDATES -gt 0 ]]; then
+  echo "YAOURT" ${UPDATES:=0}
+  echo ""
+  echo "#e5786d"
+else
+  echo "NO UPDATES"
+  echo ""
+  echo "#666666"
+fi

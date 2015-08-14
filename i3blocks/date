@@ -1,0 +1,8 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+  3) urxvt -e bash -c "gcalcli agenda; read -p 'press enter to exit: '" ;;  # 
+esac
+
+date '+%a %d %b %H:%M' | tr -s '[:lower:]' '[:upper:]'
+

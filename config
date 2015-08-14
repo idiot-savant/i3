@@ -1,0 +1,219 @@
+# i3 config file (v4)
+
+set $mod Mod4
+set $alt Mod1
+set $ctl Control
+set $dmenu -i -h 17 -sb '#B1222B' -nb '#151617' -fn 'Terminus-9'
+
+font xft:Terminus 9 
+
+floating_modifier $mod
+
+# border style for new windows
+new_window pixel 1
+
+# focus
+focus_follows_mouse yes
+
+# colors configuration
+# class                 border  backgr. text    indicator
+client.focused          #4c7899 #B1222B #ffffff #2e9ef4
+client.focused_inactive #333333 #5f676a #ffffff #484e50
+client.unfocused        #333333 #222222 #888888 #292d2e
+client.urgent           #2f343a #900000 #ffffff #900000
+
+# start a terminal
+#bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
+bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
+bindsym $mod+Shift+Return exec --no-startup-id i3-sensible-terminal -cd "`xcwd`"
+bindsym XF86Launch1 exec --no-startup-id i3-sensible-terminal
+
+# ranger
+bindsym $alt+Return exec --no-startup-id urxvt -e ranger
+bindsym $alt+Shift+Return exec --no-startup-id urxvt -e ranger "`xcwd`"
+bindsym XF86AudioMicMute exec --no-startup-id urxvt -e ranger
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# alt-tab
+# bindsym $alt+Tab exec --no-startup-id python3 $HOME/bin/focus-last.py --switch
+
+# dmenu
+bindsym $alt+space exec --no-startup-id dmenu_recent_aliases $dmenu -p exec
+bindsym $ctl+space exec --no-startup-id j4-dmenu-desktop --term urxvt --display-binary --dmenu="dmenu $dmenu -p desktop"
+bindsym $mod+space exec --no-startup-id $HOME/bin/dmenu-terminal.sh $dmenu -p shell
+
+bindsym $mod+d exec --no-startup-id $HOME/bin/dmenu-xrandr.rb "$dmenu"
+bindsym $mod+a exec --no-startup-id $HOME/bin/dmenu-mpd.sh -a $dmenu
+bindsym $mod+s exec --no-startup-id $HOME/bin/dmenu-mpd.sh -s $dmenu
+
+bindsym $mod+$alt+v exec --no-startup-id $HOME/bin/dmenu-clipboard.sh $dmenu
+bindsym $mod+Print exec --no-startup-id $HOME/bin/dmenu-scrot.sh $dmenu
+
+bindsym $mod+w exec --no-startup-id /usr/bin/quickswitch.py -d "dmenu $dmenu -l 20 -p window"
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# split in vertical orientation
+bindsym $mod+minus split v
+
+# split in horizontal orientation
+bindsym $mod+backslash split h
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+# bindsym $mod+s layout stacking
+# bindsym $mod+w layout tabbed
+# bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+# bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+# bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+#bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+bindsym $mod+$ctl+l workspace next
+bindsym $mod+$ctl+h workspace prev
+bindsym $mod+Escape workspace back_and_forth
+workspace_auto_back_and_forth yes
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+#bindsym Caps_Lock exec urxvt
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 2 px or 2 ppt
+        bindsym j resize grow height 2 px or 2 ppt
+        bindsym k resize shrink height 2 px or 2 ppt
+        bindsym l resize grow width 2 px or 2 ppt
+
+        bindsym Shift+h resize grow width 2 px or 2 ppt
+        bindsym Shift+j resize shrink height 2 px or 2 ppt
+        bindsym Shift+k resize grow height 2 px or 2 ppt
+        bindsym Shift+l resize shrink width 2 px or 2 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 2dB- unmute && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioMute        exec --no-startup-id amixer -q set Master toggle && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 2dB+ unmute && pkill -RTMIN+10 i3blocks
+bindsym XF86MonBrightnessUp     exec --no-startup-id xbacklight -inc 10 && pkill -RTMIN+8 i3blocks
+bindsym XF86MonBrightnessDown   exec --no-startup-id xbacklight -dec 10 && pkill -RTMIN+8 i3blocks
+bindsym XF86Display exec --no-startup-id sleep 1 && xset dpms force off
+
+bindsym XF86ScreenSaver exec --no-startup-id slock
+bindsym XF86WebCam exec --no-startup-id guvcview
+
+#bindsym --release XF86Sleep exec systemctl suspend
+bindsym --release $alt+XF86Sleep exec systemctl hibernate
+
+bindsym --release Caps_Lock exec --no-startup-id pkill -RTMIN+9 i3blocks
+
+bindsym $mod+/ bar mode toggle bar-0
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+    #status_command i3status
+	status_command i3blocks -c ~/.i3/blocks
+	position top
+    tray_output none
+
+    colors {
+        background #151617
+        statusline #ffffff
+        separator #666666
+
+        focused_workspace  #B1222B #B1222B #ffffff
+        active_workspace   #333333 #5f676a #ffffff
+        inactive_workspace #333333 #222222 #888888
+        urgent_workspace   #0087FF #0087FF #ffffff
+    }
+}
+
+#bar {
+#	status_command i3blocks -c ~/.i3/blocks
+#	position top
+#    tray_output primary
+#
+#    colors {
+#        background #151617
+#        statusline #ffffff
+#        separator #666666
+#
+#        focused_workspace  #b1222b #b1222b #ffffff
+#        active_workspace   #333333 #5f676a #ffffff
+#        inactive_workspace #333333 #222222 #888888
+#        urgent_workspace   #0087FF #0087FF #ffffff
+#    }
+#}
+
+exec --no-startup-id syndaemon -K -d -t -i 1
+exec --no-startup-id nitrogen --restore
+# exec --no-startup-id perl ~/src/xSwipe/xSwipe.pl -m 25
+exec --no-startup-id google-musicmanager -s ~/music
+exec --no-startup-id mpdcron
+exec --no-startup-id xcmenu
+exec --no-startup-id $HOME/bin/startup-display.sh
+
+# vim:filetype=i3

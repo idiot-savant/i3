@@ -1,0 +1,150 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+separator_block_width=13
+color=#dbdbdb
+
+[i3blocks]
+command=~/.i3/i3blocks/notify
+signal=12
+
+[caps]
+#command=~/.i3/i3blocks/caps_lock
+command=~/.i3/i3blocks/key_indicator  -c '#ffff00' -C '#666666'
+#interval=1
+separator=true
+#color=#5da7e1
+interval=once
+signal=9
+
+[thinkful]
+command=~/projects/mentor-queue/app.js
+separator=true
+interval=300
+
+[music]
+command=.i3/i3blocks/music
+interval=once
+signal=11
+
+[weather]
+command=~/.i3/i3blocks/weather 15241 | tr -s '[:lower:]' '[:upper:]'
+interval=1800
+color=#b698d9
+separator=true
+signal=7
+
+[uptime]
+command=.i3/i3blocks/uptime | tr -s '[:lower:]' '[:upper:]'
+# color=#666666
+interval=30
+
+#[memory]
+#label=MEM
+#command=~/.i3/i3blocks/memory
+#interval=30
+
+[yaourt]
+# label=PACMAN
+command=~/.i3/i3blocks/yaourt
+interval=300
+# color=#666666
+signal=3
+
+[disk]
+label=ROOT
+instance=/
+command=~/.i3/i3blocks/disk
+interval=30
+
+[disk]
+label=HOME
+instance=/home
+command=~/.i3/i3blocks/disk
+interval=30
+
+[wireless]
+label=WLAN
+instance=wlp3s0
+command=~/.i3/i3blocks/network | tr -s '[:lower:]' '[:upper:]'
+color=#cae682
+interval=once
+separator=false
+signal=6
+
+[ethernet]
+label=ETH
+instance=enp0s25
+command=~/.i3/i3blocks/network
+color=#cae682
+interval=once
+signal=5
+
+#[load]
+#command=~/.i3/i3blocks/load_average
+#interval=10
+
+[temperature]
+label=CPU
+command=~/.i3/i3blocks/temperature
+interval=5
+
+#[download]
+#command=~/.i3/i3blocks/bandwidth rx
+#min_width=0000 kB/s
+#align=right
+#color=#00FF00
+#interval=1
+#
+#[upload]
+#command=~/.i3/i3blocks/bandwidth tx
+#min_width=0000 kB/s
+#align=right
+#color=#FF0000
+#interval=1
+
+[brightness]
+label=LCD
+command=~/.i3/i3blocks/brightness
+interval=once
+signal=8
+
+[volume]
+label=VOL
+command=~/.i3/i3blocks/volume
+interval=once
+signal=10
+
+[battery]
+label=BAT
+#instance=1
+command=~/.i3/i3blocks/battery
+interval=30
+signal=4
+
+[time]
+#command=date '+%Y-%m-%d %H:%M'
+#command=date '+%a %d %b %H:%M' | tr -s '[:lower:]' '[:upper:]'
+command=.i3/i3blocks/date
+interval=30
+# separator=false

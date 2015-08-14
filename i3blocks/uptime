@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+uptime | sed 's/^.*up *//;s/, *[0-9]* user.*$/m/;
+s/ day[^0-9]*/d /;s/ \([hms]\).*m$/\1/;s/:/h /;
+s/^/UP /'

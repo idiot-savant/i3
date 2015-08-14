@@ -1,0 +1,10 @@
+#!/bin/bash
+FILE=$HOME/tmp/current
+if [ -f $FILE ];
+then
+    cat $FILE
+else
+    echo "NOT PLAYING"
+    echo ""
+    echo "#666666"
+fi
